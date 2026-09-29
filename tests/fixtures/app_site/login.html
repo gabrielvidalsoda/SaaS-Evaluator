@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Sign in — FixtureApp</title></head>
+<body>
+  <h1>Sign in</h1>
+  <!-- Two-step login: e-mail first, then the password field appears. -->
+  <form id="f" onsubmit="return false">
+    <label for="email">E-mail</label>
+    <input id="email" type="email" autocomplete="username">
+    <button id="next" type="button">Continuar</button>
+    <div id="step2" style="display:none">
+      <label for="pw">Password</label>
+      <input id="pw" type="password" autocomplete="current-password">
+      <button id="go" type="submit">Entrar</button>
+    </div>
+    <p id="err" role="alert"></p>
+  </form>
+  <script>
+    document.getElementById('next').onclick = () => { document.getElementById('step2').style.display = 'block'; };
+    document.getElementById('f').onsubmit = () => {
+      const ok = document.getElementById('email').value === 'qa@fixture.test'
+              && document.getElementById('pw').value === 's3cret!';
+      if (!ok) { document.getElementById('err').innerText = 'Invalid credentials'; return false; }
+      document.cookie = 'app_session=abc123; path=/; SameSite=Lax';
+      localStorage.setItem('access_token', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.x');
+      location.href = 'app.html';
+      return false;
+    };
+  </script>
+</body>
+</html>

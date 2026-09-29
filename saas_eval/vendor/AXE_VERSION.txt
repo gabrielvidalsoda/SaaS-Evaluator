@@ -1,0 +1,1 @@
+axe-core 4.13.0 (MPL-2.0) — https://github.com/dequelabs/axe-core — vendored unmodified for in-page accessibility checks.

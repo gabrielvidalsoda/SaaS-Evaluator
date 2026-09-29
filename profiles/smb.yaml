@@ -1,0 +1,13 @@
+name: smb
+description: >
+  Small/medium business: ease of use, price transparency and speed matter most;
+  heavy compliance requirements matter less.
+weights:
+  SEC: 18
+  UX: 28
+  PERF: 15
+  REL: 9
+  INT: 10
+  DATA: 8
+  TRN: 12
+  A11Y: 10   # opt-in pillar — used only with --a11y

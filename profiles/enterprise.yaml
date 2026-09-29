@@ -1,0 +1,13 @@
+name: enterprise
+description: >
+  Enterprise procurement: security, data governance and reliability dominate;
+  cost transparency matters less.
+weights:
+  SEC: 30
+  UX: 12
+  PERF: 10
+  REL: 13
+  INT: 10
+  DATA: 12
+  TRN: 3
+  A11Y: 10   # opt-in pillar — used only with --a11y

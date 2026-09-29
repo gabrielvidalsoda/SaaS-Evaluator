@@ -1,0 +1,15 @@
+name: default
+description: >
+  Balanced evaluation for a typical B2B SaaS purchase. Weights are relative
+  importance (like the "importance" column of the LeanIX vendor template); the
+  overall score is normalized over the pillars that actually run, so A11Y's
+  weight only counts when --a11y is passed.
+weights:
+  SEC: 25
+  UX: 20
+  PERF: 15
+  REL: 10
+  INT: 8
+  DATA: 7
+  TRN: 5
+  A11Y: 10   # opt-in pillar — used only with --a11y
