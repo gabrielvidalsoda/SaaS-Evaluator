@@ -1,7 +1,6 @@
 # Structured logging — project convention
 
-Adapted from agente-qa's logging rule: structured JSONL events, consistent levels,
-never log secrets. No aggregation/alerting infrastructure — this is a local,
+Structured JSONL events, consistent levels, never log secrets. No aggregation/alerting infrastructure — this is a local,
 single-process tool.
 
 ## Where it lives

@@ -1,6 +1,5 @@
-"""Browser collector (Playwright, async). Adapted from agente-qa's `BrowserDriver`:
-same launch/listener structure, but instead of acting on the page it *measures*
-each visited page — Web Vitals, resources, caching, console errors, third-party
+"""Browser collector (Playwright, async). Instead of acting on the page it
+*measures* each visited page — Web Vitals, resources, caching, console errors, third-party
 scripts, widgets, forms — and returns a `PageEvidence`.
 
 Scripts are injected with `add_init_script`/`evaluate` (CDP), which the page's
@@ -169,6 +168,11 @@ _MAX_AGE_RX = re.compile(r"max-age=(\d+)")
 LONG_CACHE_SECONDS = 7 * 24 * 3600
 
 
+def run_relative(path: Path) -> str:
+    """'screenshots/x.jpg' — stored relative to the run folder (portable across machines/OSes)."""
+    return f"{path.parent.name}/{path.name}"
+
+
 def _is_long_cache(headers: dict[str, str]) -> bool:
     cc = headers.get("cache-control", "").lower()
     if "no-store" in cc or "no-cache" in cc:
@@ -321,7 +325,7 @@ class BrowserCollector:
         if screenshot_path is not None:
             try:
                 await page.screenshot(path=str(screenshot_path), type="jpeg", quality=70)
-                ev.screenshot = screenshot_path.as_posix()
+                ev.screenshot = run_relative(screenshot_path)
             except Exception:
                 pass
         return ev

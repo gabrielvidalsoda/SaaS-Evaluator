@@ -1,5 +1,5 @@
-"""Shared driver for Claude sessions via claude-agent-sdk (adapted from agente-qa
-`agent/loop.py`): runs the `claude` CLI with the subscription login (no API key),
+"""Shared driver for Claude sessions via claude-agent-sdk: runs the `claude` CLI
+with the user's Claude subscription login (no API key),
 exposes only our in-process MCP tools, and turns SDK failures into actionable
 RuntimeErrors."""
 

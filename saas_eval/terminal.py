@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 from contextlib import contextmanager
+from pathlib import Path
 from typing import Any, Iterator
 
 from rich.console import Console
@@ -94,4 +95,5 @@ class Reporter:
             f"\n[bold]Overall:[/bold] [{GRADE_COLOR.get(ev['grade'], 'white')}]{ev['grade']} ({overall})[/] · "
             f"coverage {ev['coverage']:.0%} · {ev['confidence']} confidence"
         )
-        self.console.print(f"Report: [link=file:///{report_path}]{escape(report_path)}[/link]")
+        uri = Path(report_path).resolve().as_uri()  # file:///C:/… on Windows, file:///home/… elsewhere
+        self.console.print(f"Report: [link={uri}]{escape(report_path)}[/link]")

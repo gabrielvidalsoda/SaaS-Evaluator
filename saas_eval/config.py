@@ -1,4 +1,10 @@
-"""Application settings — read from environment variables (.env)."""
+"""Application settings — read from environment variables (.env in the current directory).
+
+Everything the tool ships with (prompts, weight profiles, axe-core) lives inside the
+package, so it works the same whether it runs from a clone (`uv run saas-eval`) or
+is installed as a tool (`uv tool install` / `pipx install`). Run data is written
+relative to the directory you run the command from, unless SAAS_EVAL_DATA_DIR says
+otherwise."""
 
 from __future__ import annotations
 
@@ -8,10 +14,10 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-# Loads .env from the current directory (repo root), if present.
+# Loads .env from the current working directory, if present.
 load_dotenv()
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PACKAGE_DIR = Path(__file__).resolve().parent
 
 
 @dataclass(frozen=True)
@@ -25,13 +31,18 @@ class Settings:
     login_pass: str | None
 
 
+def _dir(env: str, default: Path) -> Path:
+    value = os.getenv(env)
+    return Path(value).expanduser() if value else default
+
+
 def load_settings() -> Settings:
     return Settings(
         model=os.getenv("SAAS_EVAL_MODEL", "sonnet"),
         max_pages=int(os.getenv("SAAS_EVAL_MAX_PAGES", "12")),
-        data_dir=Path(os.getenv("SAAS_EVAL_DATA_DIR", "data")),
-        profiles_dir=PROJECT_ROOT / "profiles",
-        prompts_dir=PROJECT_ROOT / "prompts",
+        data_dir=_dir("SAAS_EVAL_DATA_DIR", Path("data")),
+        profiles_dir=_dir("SAAS_EVAL_PROFILES_DIR", PACKAGE_DIR / "profiles"),
+        prompts_dir=_dir("SAAS_EVAL_PROMPTS_DIR", PACKAGE_DIR / "prompts"),
         login_user=os.getenv("SAAS_EVAL_USER") or None,
         login_pass=os.getenv("SAAS_EVAL_PASS") or None,
     )

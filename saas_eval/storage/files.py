@@ -1,6 +1,6 @@
 """File persistence — no database. All state of a run lives in data/runs/<run-id>/.
 JSON writes are atomic (temp file + rename) so nothing is corrupted if the process
-is interrupted midway (Ctrl+C). Adapted from agente-qa `storage/files.py`."""
+is interrupted midway (Ctrl+C)."""
 
 from __future__ import annotations
 

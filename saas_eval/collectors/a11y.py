@@ -15,7 +15,7 @@ from typing import Any
 
 from playwright.async_api import Page
 
-from .browser import DESKTOP_VIEWPORT, NAV_TIMEOUT_MS, BrowserCollector
+from .browser import DESKTOP_VIEWPORT, NAV_TIMEOUT_MS, BrowserCollector, run_relative
 
 _AXE_SOURCE = (Path(__file__).resolve().parent.parent / "vendor" / "axe.min.js").read_text(encoding="utf-8")
 
@@ -158,7 +158,7 @@ async def collect_a11y(
             result = await page.evaluate(_OVERFLOW_JS)
             shot = screenshots_dir / f"viewport-{name}.jpg"
             await page.screenshot(path=str(shot), type="jpeg", quality=70)
-            result["screenshot"] = shot.as_posix()
+            result["screenshot"] = run_relative(shot)
             if name == "mobile":
                 out["tap_targets"] = await page.evaluate(_TAP_TARGETS_JS)
             out["viewports"][name] = result

@@ -1,0 +1,4 @@
+# Normalize line endings across Linux/macOS/Windows checkouts.
+* text=auto eol=lf
+*.jpg binary
+*.png binary

@@ -216,9 +216,10 @@ def build_judge_server(ctx: JudgeContext):
         if shot is None and ev.a11y:  # viewport shots from --a11y (mobile/tablet/desktop)
             vp = (ev.a11y.get("viewports") or {}).get(ref.replace("viewport-", ""))
             shot = vp.get("screenshot") if vp else None
-        if not shot or not Path(shot).exists():
+        shot_path = ctx.log.paths.run_dir / shot if shot else None
+        if shot_path is None or not shot_path.exists():
             return _err(f"No screenshot for {ref!r}.")
-        data = base64.b64encode(Path(shot).read_bytes()).decode("ascii")
+        data = base64.b64encode(shot_path.read_bytes()).decode("ascii")
         return _ok(f"Screenshot of {page.final_url if page else ref}:", {"type": "image", "data": data, "mimeType": "image/jpeg"})
 
     @tool("submit_verdicts", "Submit one or more verdicts. pass/partial verdicts MUST include verbatim quotes "

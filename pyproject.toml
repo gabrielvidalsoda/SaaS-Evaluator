@@ -4,6 +4,15 @@ version = "0.1.0"
 description = "Terminal tool that scores a SaaS application across pillars (security, UX, performance, reliability, ...) using Playwright, passive probes and optional Claude-based judgement."
 readme = "README.md"
 requires-python = ">=3.11"
+keywords = ["saas", "evaluation", "security", "playwright", "vendor-assessment", "cli"]
+classifiers = [
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+]
 dependencies = [
     "playwright>=1.45.0",
     "httpx[http2]>=0.27.0",
@@ -23,6 +32,10 @@ dev = [
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
 ]
+
+[project.urls]
+Repository = "https://github.com/gabrielvidalsoda/SaaS-Evaluator"
+Issues = "https://github.com/gabrielvidalsoda/SaaS-Evaluator/issues"
 
 [project.scripts]
 saas-eval = "saas_eval.cli:app"

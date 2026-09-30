@@ -6,8 +6,8 @@
 - `run_explorer` : reuses the logged-in session and explores the product
                    read-only, then judges UX-07 with verified quotes.
 
-The action layer is agente-qa's `BrowserDriver` pattern: interactive elements are
-tagged with a sequential id in each snapshot, and the model acts by id."""
+Interactive elements are tagged with a sequential id in each snapshot, and the
+model acts by id (no brittle CSS selectors)."""
 
 from __future__ import annotations
 
@@ -48,7 +48,7 @@ _INTERACTIVE = [
     "[contenteditable='true']",
 ]
 
-# From agente-qa `_SNAPSHOT_JS`: clears stale ids, tags visible interactive elements.
+# Clears stale ids, then tags visible interactive elements with a sequential id.
 _SNAPSHOT_JS = """
 (selectors) => {
   document.querySelectorAll('[data-se-id]').forEach((el) => el.removeAttribute('data-se-id'));

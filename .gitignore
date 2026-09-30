@@ -6,3 +6,8 @@ __pycache__/
 data/
 credentials/
 *.credentials.yaml
+dist/
+build/
+*.egg-info/
+.DS_Store
+Thumbs.db

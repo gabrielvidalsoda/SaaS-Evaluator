@@ -1,9 +1,12 @@
 # saas-evaluator — instructions for Claude Code
 
 Terminal tool that scores a SaaS application (by URL) across evaluation pillars.
-See `README.md` for usage and the scoring model; the design rationale is in the
-plan this project was built from (pillars from the Josys checklist, weighting from
-the LeanIX vendor template in `../References/`).
+See `README.md` for usage and the scoring model. Pillars follow common SaaS
+evaluation checklists (security, integration, UX, scalability, cost, support,
+data, roadmap); weighting follows the usual "grade × importance" vendor matrix.
+
+The tool must keep working on Linux, macOS and Windows (CI runs all three): use
+`pathlib`, always pass `encoding="utf-8"`, and store paths relative to the run folder.
 
 ## Invariants — keep them when changing code
 
